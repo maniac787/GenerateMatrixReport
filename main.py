@@ -27,3 +27,5 @@ if __name__ == '__main__':
 
     # Mostrar el resultado
     print(df_detalle)
+
+    df_detalle.to_excel('./raw/detalle_dependencias.xlsx', index=False)

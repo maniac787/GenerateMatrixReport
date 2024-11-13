@@ -1,3 +1,4 @@
 .idea
 .venv
-raw/matrix.xlsx
+/raw/detalle_dependencias.xlsx
+/raw/matrix.xlsx
