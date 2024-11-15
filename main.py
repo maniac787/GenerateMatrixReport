@@ -1,10 +1,11 @@
-# Press the green button in the gutter to run the script.
+import pandas as pd
+
 if __name__ == '__main__':
-    import pandas as pd
 
     # Cargar el archivo Excel
     # 'ruta_del_archivo.xlsx' con la ruta real de tu archivo
-    df = pd.read_excel('./raw/matrix2.xlsx', sheet_name="Integraciones-draft", usecols='B:AX', skiprows=2, header=0, index_col=0)
+    df = pd.read_excel('./raw/matrix2.xlsx', sheet_name="Integraciones-draft", usecols='B:AX', skiprows=2, header=0,
+                       index_col=0)
 
     # Crear un nuevo DataFrame para almacenar los detalles por satélite
     detalle_dependencias = []
