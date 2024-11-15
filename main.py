@@ -3,8 +3,8 @@ if __name__ == '__main__':
     import pandas as pd
 
     # Cargar el archivo Excel
-    # Asegúrate de reemplazar 'ruta_del_archivo.xlsx' con la ruta real de tu archivo
-    df = pd.read_excel('./raw/matrix.xlsx', index_col=0)
+    # 'ruta_del_archivo.xlsx' con la ruta real de tu archivo
+    df = pd.read_excel('./raw/matrix2.xlsx', sheet_name="Integraciones-draft", usecols='B:AX', skiprows=2, header=0, index_col=0)
 
     # Crear un nuevo DataFrame para almacenar los detalles por satélite
     detalle_dependencias = []
