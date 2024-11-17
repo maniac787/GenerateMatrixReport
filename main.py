@@ -1,4 +1,7 @@
 import pandas as pd
+# Normalizar los nombres de los satélites (reemplazar espacios por guiones bajos)
+def normalize_name(name):
+    return name.replace("(", "").replace(")", "").replace(" ", "_").replace("|", "/").replace("\n", " / ")
 
 if __name__ == '__main__':
 
@@ -29,4 +32,18 @@ if __name__ == '__main__':
     # Mostrar el resultado
     print(df_detalle)
 
-    df_detalle.to_excel('./raw/detalle_dependencias.xlsx', index=False)
+    df_detalle.to_excel('./result/detalle_dependencias.xlsx', index=False)
+
+    mermaid_code = "```mermaid \n\tgraph TD\n"
+
+    for _, row in df_detalle.iterrows():
+        source = normalize_name(row["Nombre satelite"])
+        dependency_type = normalize_name(row["Tipo dependencia"])
+        target = normalize_name(row["Satelite dependiente"])
+        mermaid_code += f'    {source} -->|{dependency_type}| {target}\n'
+    mermaid_code += "\n```"
+    with open("./result/flujo.md", "w") as file:
+        file.write(mermaid_code)
+
+    print(mermaid_code)
+
