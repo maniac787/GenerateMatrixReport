@@ -1,6 +1,6 @@
 .idea
 .venv
-/raw/detalle_dependencias.xlsx
-/raw/matrix.xlsx
-/result/detalle_dependencias.xlsx
-/result/flujo.md
+/raw/*.xlsx
+
+/result/*.xlsx
+/result/*.md
