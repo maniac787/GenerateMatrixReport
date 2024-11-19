@@ -30,7 +30,7 @@ def clear_draw_files():
         print(f"Archivo {archivo} eliminado.")
 
 
-def print_box(satelite_data_frame: DataFrame, file_name: str, position_y: int) -> None:
+def print_box(satelite_data_frame: DataFrame, file_name: str, position_y: int, color_style: str) -> None:
     xml_template_start = """
         <mxfile>
           <diagram name="Diagrama 1">
@@ -51,14 +51,11 @@ def print_box(satelite_data_frame: DataFrame, file_name: str, position_y: int) -
     pos_x = 300
     index = 0
     num_boxes = 7
-    color_seguros = f'fillColor=#d5e8d4;strokeColor=#82b366;'
-    color_salud = f'fillColor=#dae8fc;strokeColor=#6c8ebf;'
-    color_externo = f'fillColor=#fff2cc;strokeColor=#d6b656;'
     for id, row in satelite_data_frame.iterrows():
         satelite = row['Satélite']
         if index < num_boxes:
             xml_code += (
-                f'\n \t\t\t        <mxCell id="{id}" value="{satelite}" style="rounded=1;whiteSpace=wrap;html=1;{color_seguros}" vertex="1" parent="1">\n'
+                f'\n \t\t\t        <mxCell id="{id}" value="{satelite}" style="rounded=1;whiteSpace=wrap;html=1;{color_style}" vertex="1" parent="1">\n'
                 f'\t\t\t\t\t\t<mxGeometry x="{pos_x}" y="{pos_y}" width="120" height="60" as="geometry"/>\n'
                 f'\t\t\t\t\t</mxCell>\n')
             pos_y += 70
@@ -94,8 +91,12 @@ if __name__ == '__main__':
 
     clear_draw_files()
 
-    print_box(filtro_seguros, 'draw_seguros', 100)
-    print_box(filtro_salud, 'draw_salud', 100)
-    print_box(filtro_externo, 'draw_externo', 100)
+    color_seguros = f'fillColor=#d5e8d4;strokeColor=#82b366;'
+    color_salud = f'fillColor=#dae8fc;strokeColor=#6c8ebf;'
+    color_externo = f'fillColor=#fff2cc;strokeColor=#d6b656;'
+
+    print_box(filtro_seguros, 'draw_seguros', 100, color_seguros)
+    print_box(filtro_salud, 'draw_salud', 100, color_salud)
+    print_box(filtro_externo, 'draw_externo', 100, color_externo)
 
     print("Diagrama generado como diagrama.drawio")
