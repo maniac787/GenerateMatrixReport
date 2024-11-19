@@ -92,8 +92,20 @@ if __name__ == '__main__':
     color_externo = f'fillColor=#fff2cc;strokeColor=#d6b656;'
 
     clear_draw_files()
-
+    # REPORTE para infraestructura de satelite
     generar_reporte(df, 'Infraestructura', 'PAC Seguros', 'seguros', 'infra', color_seguros)
     generar_reporte(df, 'Infraestructura', 'PAC Salud', 'salud', 'infra', color_salud)
     generar_reporte(df, 'Infraestructura', 'O. Externas', 'externo', 'infra', color_externo)
     generar_reporte(df, 'Infraestructura', 'E.Reguladores', 'regulador', 'infra', color_externo)
+
+    # REPORTE para gestion de cambios de satelite
+    generar_reporte(df, 'Gestión de Cambios del Satélite', 'PAC Seguros', 'seguros', 'ge_cambio', color_seguros)
+    generar_reporte(df, 'Gestión de Cambios del Satélite', 'PAC Salud', 'salud', 'ge_cambio', color_salud)
+    generar_reporte(df, 'Gestión de Cambios del Satélite', 'O. Externas', 'externo', 'ge_cambio', color_externo)
+    generar_reporte(df, 'Gestión de Cambios del Satélite', 'E.Reguladores', 'regulador', 'ge_cambio', color_externo)
+
+    # REPORTE para gestion de cambios de satelite
+    generar_reporte(df, 'Owner del satelite', 'Pacifico Seguros', 'seguros', 'owner', color_seguros)
+    generar_reporte(df, 'Owner del satelite', 'Pacifico Salud', 'salud', 'owner', color_salud)
+    generar_reporte(df, 'Owner del satelite', 'Externo', 'externo', 'owner', color_externo)
+    generar_reporte(df, 'Owner del satelite', 'Pacifico Salud, Pacifico Seguros', 'compartido', 'owner', color_externo)
