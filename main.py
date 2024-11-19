@@ -1,12 +1,30 @@
 import pandas as pd
+from pandas import DataFrame
+
+
 # Normalizar los nombres de los satélites (reemplazar espacios por guiones bajos)
 def normalize_name(name):
     return name.replace("(", "").replace(")", "").replace(" ", "_").replace("|", "/").replace("\n", " / ")
 
+
+def generate_mermaid_code(df_detalle: DataFrame):
+    mermaid_code = "```mermaid \n\tgraph TD\n"
+
+    for _, row in df_detalle.iterrows():
+        source = normalize_name(row["Nombre satelite"])
+        dependency_type = normalize_name(row["Tipo dependencia"])
+        target = normalize_name(row["Satelite dependiente"])
+        mermaid_code += f'    {source} -->|{dependency_type}| {target}\n'
+    mermaid_code += "\n```"
+    with open("./result/mermaid_dependencias.md", "w") as file:
+        file.write(mermaid_code)
+
+    print(mermaid_code)
+
+
 if __name__ == '__main__':
 
     # Cargar el archivo Excel
-    # 'ruta_del_archivo.xlsx' con la ruta real de tu archivo
     df = pd.read_excel('./raw/matrix.xlsx', sheet_name="draft", usecols='B:AX', skiprows=2, header=0,
                        index_col=0)
 
@@ -28,22 +46,5 @@ if __name__ == '__main__':
 
     # Crear un nuevo DataFrame con los detalles de las dependencias
     df_detalle = pd.DataFrame(detalle_dependencias)
-
-    # Mostrar el resultado
-    print(df_detalle)
-
     df_detalle.to_excel('./result/detalle_dependencias.xlsx', index=False)
-
-    mermaid_code = "```mermaid \n\tgraph TD\n"
-
-    for _, row in df_detalle.iterrows():
-        source = normalize_name(row["Nombre satelite"])
-        dependency_type = normalize_name(row["Tipo dependencia"])
-        target = normalize_name(row["Satelite dependiente"])
-        mermaid_code += f'    {source} -->|{dependency_type}| {target}\n'
-    mermaid_code += "\n```"
-    with open("./result/flujo.md", "w") as file:
-        file.write(mermaid_code)
-
-    print(mermaid_code)
-
+    generate_mermaid_code(df_detalle)

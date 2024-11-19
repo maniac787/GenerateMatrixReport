@@ -5,6 +5,18 @@ import pandas as pd
 from pandas import DataFrame
 
 
+def export_csv(data_frame_satelites: DataFrame, dominio: str):
+    # Obtener el número de registros
+    num_filas = data_frame_satelites.shape[0]
+    print(f"Satélites en la infraestructura de {dominio}: {num_filas}")
+
+    print(f"Satélites en la infraestructura de {dominio}")
+    print(filtro_salud['Satélite'])
+
+    # Exportar a un archivo CSV
+    data_frame_satelites['Satélite'].to_csv(f'./result/satelites_infra_{dominio}.csv', index=False)
+
+
 def clear_draw_files():
     # Definir el directorio donde se encuentran los archivos
     directorio = './result'
@@ -76,29 +88,9 @@ if __name__ == '__main__':
     filtro_salud = df[df['Infraestructura'] == 'PAC Salud']
     filtro_externo = df[df['Infraestructura'] == 'O. Externas']
 
-    # Obtener el número de registros para seguros
-    num_filas = filtro_seguros.shape[0]
-    print(f"Satélites en la infraestructura de seguros: {num_filas}")
-
-    # Obtener el número de registros para salud
-    num_filas = filtro_salud.shape[0]
-    print(f"Satélites en la infraestructura de salud: {num_filas}")
-
-    # Obtener el número de registros para salud
-    num_filas = filtro_externo.shape[0]
-    print(f"Satélites en la infraestructura externa: {num_filas}")
-
-    print("Satélites en la infraestructura de seguros")
-    print(filtro_seguros['Satélite'])
-    print("Satélites en la infraestructura de salud")
-    print(filtro_salud['Satélite'])
-    print("Satélites en la infraestructura externa")
-    print(filtro_externo['Satélite'])
-
-    # Exportar a un archivo CSV
-    filtro_seguros['Satélite'].to_csv('./result/satelites_infra_seguros.csv', index=False)
-    filtro_salud['Satélite'].to_csv('./result/satelites_infra_salud.csv', index=False)
-    filtro_externo['Satélite'].to_csv('./result/satelites_infra_externos.csv', index=False)
+    export_csv(filtro_salud, "salud")
+    export_csv(filtro_seguros, "seguros")
+    export_csv(filtro_externo, "externo")
 
     clear_draw_files()
 
