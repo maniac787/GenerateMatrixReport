@@ -4,3 +4,5 @@
 
 /result/*.xlsx
 /result/*.md
+/result/*.csv
+/result/*.drawio
