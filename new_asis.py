@@ -11,7 +11,7 @@ def export_csv(data_frame_satelites: DataFrame, dominio: str):
     print(f"Satélites en la infraestructura de {dominio}: {num_filas}")
 
     print(f"Satélites en la infraestructura de {dominio}")
-    print(filtro_salud['Satélite'])
+    print(data_frame_satelites['Satélite'])
 
     # Exportar a un archivo CSV
     data_frame_satelites['Satélite'].to_csv(f'./result/satelites_infra_{dominio}.csv', index=False)
@@ -46,7 +46,7 @@ def print_box(satelite_data_frame: DataFrame, file_name: str, position_y: int, c
         </mxfile>
         """
     xml_code = ""
-    xml_code += f'{xml_template_start}'
+    # xml_code += f'{xml_template_start}'
     pos_y = position_y
     pos_x = 300
     index = 0
@@ -65,10 +65,21 @@ def print_box(satelite_data_frame: DataFrame, file_name: str, position_y: int, c
             pos_x += 130
             index = 0
 
-    xml_code += f'{xml_template_end}'
+    # xml_code += f'{xml_template_end}'
+
+    draw_repot = xml_template_start + xml_code + xml_template_end
     # Guardar el archivo como .drawio
-    with open(f'./result/{file_name}.drawio', "w") as f:
-        f.write(xml_code)
+    if xml_code and xml_code.strip():
+        with open(f'./result/{file_name}.drawio', "w") as f:
+            f.write(draw_repot)
+
+
+def generar_reporte(df_excel: DataFrame, columna: str, filtro: str, dominio: str, tipo_reporte: str,
+                    style_color_box: str
+                    ) -> None:
+    df_filtro = df_excel[df_excel[f'{columna}'] == filtro]
+    export_csv(df_filtro, f'{dominio}')
+    print_box(df_filtro, f'draw_{tipo_reporte}_{dominio}', 100, style_color_box)
 
 
 if __name__ == '__main__':
@@ -76,27 +87,13 @@ if __name__ == '__main__':
                        sheet_name="Ajustado",
                        index_col=0,
                        skiprows=1, header=0, nrows=48)
-
-    # Obtener el número de registros
-    num_filas = df.shape[0]
-    print(f"El número de filas es: {num_filas}")
-
-    filtro_seguros = df[df['Infraestructura'] == 'PAC Seguros']
-    filtro_salud = df[df['Infraestructura'] == 'PAC Salud']
-    filtro_externo = df[df['Infraestructura'] == 'O. Externas']
-
-    export_csv(filtro_salud, "salud")
-    export_csv(filtro_seguros, "seguros")
-    export_csv(filtro_externo, "externo")
-
-    clear_draw_files()
-
     color_seguros = f'fillColor=#d5e8d4;strokeColor=#82b366;'
     color_salud = f'fillColor=#dae8fc;strokeColor=#6c8ebf;'
     color_externo = f'fillColor=#fff2cc;strokeColor=#d6b656;'
 
-    print_box(filtro_seguros, 'draw_seguros', 100, color_seguros)
-    print_box(filtro_salud, 'draw_salud', 100, color_salud)
-    print_box(filtro_externo, 'draw_externo', 100, color_externo)
+    clear_draw_files()
 
-    print("Diagrama generado como diagrama.drawio")
+    generar_reporte(df, 'Infraestructura', 'PAC Seguros', 'seguros', 'infra', color_seguros)
+    generar_reporte(df, 'Infraestructura', 'PAC Salud', 'salud', 'infra', color_salud)
+    generar_reporte(df, 'Infraestructura', 'O. Externas', 'externo', 'infra', color_externo)
+    generar_reporte(df, 'Infraestructura', 'E.Reguladores', 'regulador', 'infra', color_externo)
