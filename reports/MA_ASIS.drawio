@@ -1,4 +1,4 @@
-<mxfile host="drawio-plugin" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36" modified="2024-11-20T13:56:34.458Z" etag="wD9Hkd2Y74k7P9NVp5iM" version="22.1.22" type="embed" pages="5">
+<mxfile host="drawio-plugin" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36" modified="2024-11-20T13:59:21.841Z" etag="UaOpdMG-LChjWJb0uEjt" version="22.1.22" type="embed" pages="4">
   <diagram name="infraestructura" id="xNV-a14l-VJKQCmn39NY">
     <mxGraphModel dx="4400" dy="2640" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
@@ -461,16 +461,8 @@
       </root>
     </mxGraphModel>
   </diagram>
-  <diagram id="5-_s7NFHEMW2aFrtD42h" name="macro">
-    <mxGraphModel dx="1320" dy="792" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
-      <root>
-        <mxCell id="0" />
-        <mxCell id="1" parent="0" />
-      </root>
-    </mxGraphModel>
-  </diagram>
   <diagram id="99V85slKAuJeXrQPr6BT" name="ambiente">
-    <mxGraphModel dx="2640" dy="1584" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="1709" dy="1131" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -487,7 +479,7 @@
           <mxGeometry x="670" y="770" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="3Sdjg1JfsYiXzRaFeefU-44" value="&lt;font style=&quot;font-size: 24px;&quot;&gt;&lt;b&gt;Mapa de arquitectura / Infraestructura&lt;/b&gt;&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
-          <mxGeometry x="15" width="825" height="30" as="geometry" />
+          <mxGeometry x="15" width="2545" height="30" as="geometry" />
         </mxCell>
         <mxCell id="3Sdjg1JfsYiXzRaFeefU-45" value="&lt;font size=&quot;1&quot; style=&quot;&quot;&gt;&lt;b style=&quot;font-size: 16px;&quot;&gt;Infraestructura Seguros&lt;/b&gt;&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
           <mxGeometry x="130" y="90" width="600" height="30" as="geometry" />
