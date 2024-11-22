@@ -1,0 +1,53 @@
+import pandas as pd
+
+if __name__ == '__main__':
+
+    # Leer el archivo Excel
+    excel_file = "resource/IntegrationDraft22112024.xlsx"  # Cambia esto por el nombre de tu archivo
+    df = pd.read_excel(excel_file)
+
+    # Plantilla básica de Draw.io XML
+    drawio_template = """<mxGraphModel dx="1098" dy="585" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+        <root>
+            <mxCell id="0"/>
+            <mxCell id="1" parent="0"/>
+            {cells}
+        </root>
+    </mxGraphModel>"""
+
+    # Generar las celdas para Draw.io
+    cells = []
+    x_offset = 100
+    y_offset = 100
+    step = 150
+
+    # Crear nodos únicos y sus posiciones
+    unique_nodes = pd.concat([df['Origen'], df['Destino']]).unique()
+    node_positions = {node: (x_offset, i * step + y_offset) for i, node in enumerate(unique_nodes)}
+
+    for node, (x, y) in node_positions.items():
+        cells.append(
+            f'<mxCell id="{node}" value="{node}" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">'
+            f'<mxGeometry x="{x}" y="{y}" width="120" height="60" as="geometry"/>'
+            f'</mxCell>'
+        )
+
+    # Crear conexiones (aristas)
+    for index, row in df.iterrows():
+        source, destination = row['Origen'], row['Destino']
+        connection_id = f"edge-{index}"
+        cells.append(
+            f'<mxCell id="{connection_id}" value="{row["Tipo conexion"]}" style="edgeStyle=elbowEdgeStyle;rounded=1;" edge="1" parent="1" source="{source}" target="{destination}">'
+            f'<mxGeometry relative="1" as="geometry"/>'
+            f'</mxCell>'
+        )
+
+    # Formatear todo el XML
+    drawio_content = drawio_template.format(cells="\n".join(cells))
+
+    # Guardar el archivo
+    output_file = "resource/export/integrationDraft22112024.drawio"
+    with open(output_file, "w", encoding="utf-8") as f:
+        f.write(drawio_content)
+
+    print(f"Diagrama generado y guardado como {output_file}")
