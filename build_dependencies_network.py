@@ -6,7 +6,7 @@ if __name__ == '__main__':
     if __name__ == '__main__':
         # Leer datos desde la hoja específica
         # datos = pd.read_excel('./raw/matrix_pov.xlsx', sheet_name="dynamic-resultado-matriz", usecols='A:C')
-        datos = pd.read_excel('./raw/matrix_pov.xlsx', sheet_name="dynamic-resultado-matriz")
+        datos = pd.read_excel('./raw/Matriz PoV Satélites (INTERNO).xlsx', sheet_name="dynamic-resultado-matriz")
 
         # Crear el grafo interactivo
         net = Network(height="800px", width="100%", notebook=True)

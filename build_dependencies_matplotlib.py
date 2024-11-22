@@ -9,7 +9,7 @@ import pandas as pd
 
 if __name__ == '__main__':
     # Leer datos desde un archivo Excel
-    df = pd.read_excel('./raw/matrix_pov.xlsx', sheet_name="dynamic-resultado-matriz", usecols='A:C')
+    df = pd.read_excel('./raw/Matriz PoV Satélites (INTERNO).xlsx', sheet_name="dynamic-resultado-matriz", usecols='A:C')
 
     # Crear el grafo dirigido
     G = nx.DiGraph()

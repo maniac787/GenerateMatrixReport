@@ -6,7 +6,7 @@ if __name__ == '__main__':
     # generate_mermaid_code(df)
 
     # Leer datos desde un archivo Excel
-    df_raw = pd.read_excel('./raw/matrix_pov.xlsx', sheet_name="dynamic-resultado-matriz", usecols='A:C')
+    df_raw = pd.read_excel('./raw/Matriz PoV Satélites (INTERNO).xlsx', sheet_name="dynamic-resultado-matriz", usecols='A:C')
     df = df_raw[df_raw[f'Origen'] == 'SGS']
     # Crear el grafo dirigido
     G = nx.DiGraph()

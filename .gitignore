@@ -7,4 +7,5 @@
 /result/*.csv
 /result/*.drawio
 /result/.$*.bkp
+/result/
 lib
