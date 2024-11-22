@@ -6,4 +6,5 @@
 /result/*.md
 /result/*.csv
 /result/*.drawio
+/result/.$*.bkp
 lib

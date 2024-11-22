@@ -1,10 +1,12 @@
+from datetime import datetime
+
 import pandas as pd
 
 if __name__ == '__main__':
 
     # Leer el archivo Excel
-    excel_file = "resource/IntegrationDraft22112024.xlsx"  # Cambia esto por el nombre de tu archivo
-    df = pd.read_excel(excel_file)
+    excel_file = "./raw/Matriz PoV Satélites (INTERNO).xlsx"  # Cambia esto por el nombre de tu archivo
+    df = pd.read_excel(excel_file, sheet_name="dynamic-resultado-matriz")
 
     # Plantilla básica de Draw.io XML
     drawio_template = """<mxGraphModel dx="1098" dy="585" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
@@ -45,8 +47,14 @@ if __name__ == '__main__':
     # Formatear todo el XML
     drawio_content = drawio_template.format(cells="\n".join(cells))
 
+    # Obtener la fecha actual
+    fecha_actual = datetime.now()
+
+    # Formatear la fecha
+    fecha_formateada = fecha_actual.strftime("%d%m%Y-%H_%M_%S")
+
     # Guardar el archivo
-    output_file = "resource/export/integrationDraft22112024.drawio"
+    output_file = f'result/integrationDraft{fecha_formateada}.drawio'
     with open(output_file, "w", encoding="utf-8") as f:
         f.write(drawio_content)
 
