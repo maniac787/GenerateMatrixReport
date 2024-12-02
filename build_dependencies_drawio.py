@@ -53,9 +53,11 @@ def __build_drawio(df: DataFrame, satelite_name: str):
     fecha_formateada = fecha_actual.strftime("%d%m%Y-%H_%M_%S")
 
     if (satelite_name):
-        satelite_name = '_' + satelite_name
+        satelite_name = '_' + satelite_name + '_'
+    else:
+        satelite_name = '_global_'
     # Guardar el archivo
-    output_file = f'result/integrationDraft{satelite_name}_{fecha_formateada}.drawio'
+    output_file = f'result/integracion/{satelite_name}{fecha_formateada}.drawio'
     with open(output_file, "w", encoding="utf-8") as f:
         f.write(drawio_content)
 
