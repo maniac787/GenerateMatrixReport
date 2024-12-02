@@ -67,7 +67,6 @@ if __name__ == '__main__':
     excel_file = "./raw/Matriz PoV Satélites (INTERNO).xlsx"  # Cambia esto por el nombre de tu archivo
     df = pd.read_excel(excel_file, sheet_name="28_NOV_Feedback_Integraciones")
 
-    # __build_drawio(df).
     df_origen = utilitario.unique_values(df, "Origen")
     df_destino = utilitario.unique_values(df, "Destino")
     df_destino = df_destino.rename(columns={"Destino": "Origen"})
