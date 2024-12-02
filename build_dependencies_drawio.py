@@ -1,21 +1,20 @@
 from datetime import datetime
 
 import pandas as pd
+from pandas import DataFrame
 
-if __name__ == '__main__':
+import utilitario
 
-    # Leer el archivo Excel
-    excel_file = "./raw/Matriz PoV Satélites (INTERNO).xlsx"  # Cambia esto por el nombre de tu archivo
-    df = pd.read_excel(excel_file, sheet_name="dynamic-resultado-matriz")
 
+def __build_drawio(df: DataFrame, satelite_name: str):
     # Plantilla básica de Draw.io XML
     drawio_template = """<mxGraphModel dx="1098" dy="585" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
-        <root>
-            <mxCell id="0"/>
-            <mxCell id="1" parent="0"/>
-            {cells}
-        </root>
-    </mxGraphModel>"""
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                {cells}
+            </root>
+        </mxGraphModel>"""
 
     # Generar las celdas para Draw.io
     cells = []
@@ -53,9 +52,29 @@ if __name__ == '__main__':
     # Formatear la fecha
     fecha_formateada = fecha_actual.strftime("%d%m%Y-%H_%M_%S")
 
+    if (satelite_name):
+        satelite_name = '_' + satelite_name
     # Guardar el archivo
-    output_file = f'result/integrationDraft{fecha_formateada}.drawio'
+    output_file = f'result/integrationDraft{satelite_name}_{fecha_formateada}.drawio'
     with open(output_file, "w", encoding="utf-8") as f:
         f.write(drawio_content)
 
     print(f"Diagrama generado y guardado como {output_file}")
+
+
+if __name__ == '__main__':
+    # Leer el archivo Excel
+    excel_file = "./raw/Matriz PoV Satélites (INTERNO).xlsx"  # Cambia esto por el nombre de tu archivo
+    df = pd.read_excel(excel_file, sheet_name="28_NOV_Feedback_Integraciones")
+
+    # __build_drawio(df).
+    df_origen = utilitario.unique_values(df, "Origen")
+    df_destino = utilitario.unique_values(df, "Destino")
+    df_destino = df_destino.rename(columns={"Destino": "Origen"})
+    df_result = pd.concat([df_origen, df_destino])
+    df_result = utilitario.unique_values(df_result, 'Origen')
+
+    for id, row in df_result.iterrows():
+        satelite_iter = row[0]
+        df_filtro = df[(df['Origen'] == satelite_iter) | (df['Destino'] == satelite_iter)]
+        __build_drawio(df_filtro, satelite_iter)
