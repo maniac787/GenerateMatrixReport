@@ -78,4 +78,5 @@ if __name__ == '__main__':
     for id, row in df_result.iterrows():
         satelite_iter = row[0]
         df_filtro = df[(df['Origen'] == satelite_iter) | (df['Destino'] == satelite_iter)]
+        # Diagrama por satelite individual
         __build_drawio(df_filtro, satelite_iter)
