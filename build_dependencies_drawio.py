@@ -38,7 +38,7 @@ def __build_drawio(df: DataFrame, satelite_name: str):
         source, destination = row['Origen'], row['Destino']
         connection_id = f"edge-{index}"
         cells.append(
-            f'<mxCell id="{connection_id}" value="{row["Tipo conexion"]}" style="edgeStyle=elbowEdgeStyle;rounded=1;" edge="1" parent="1" source="{source}" target="{destination}">'
+            f'<mxCell id="{utilitario.normalize_name(connection_id)}" value="{utilitario.normalize_name(row["Tipo conexion"])}" style="edgeStyle=elbowEdgeStyle;rounded=1;" edge="1" parent="1" source="{source}" target="{destination}">'
             f'<mxGeometry relative="1" as="geometry"/>'
             f'</mxCell>'
         )
