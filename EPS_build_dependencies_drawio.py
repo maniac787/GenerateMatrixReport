@@ -55,7 +55,7 @@ def __build_drawio(df: DataFrame, satelite_name: str):
     else:
         satelite_name = 'global_'
     # Guardar el archivo
-    output_file = f'result/integracion/{satelite_name}{fecha_formateada}.drawio'
+    output_file = f'result/integracion/por_linea_negocio/{satelite_name}{fecha_formateada}.drawio'
     with open(output_file, "w", encoding="utf-8") as f:
         f.write(drawio_content)
 
@@ -70,4 +70,4 @@ if __name__ == '__main__':
     # Filtrar filas donde la columna contiene 'AMED'
     df_filtro = df[df['Línea de negocio'].str.contains(linea_negocio, case=False, na=False)]
     # Diagrama por satellite individual
-    __build_drawio(df, linea_negocio)
+    __build_drawio(df_filtro, linea_negocio)

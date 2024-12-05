@@ -23,22 +23,22 @@ def __build_drawio(df: DataFrame, satelite_name: str):
     step = 150
 
     # Crear nodos únicos y sus posiciones
-    unique_nodes = pd.concat([df['Origen'], df['Destino']]).unique()
+    unique_nodes = pd.concat([utilitario.normalize_name(df['Origen']), utilitario.normalize_name(df['Destino'])]).unique()
     node_positions = {node: (x_offset, i * step + y_offset) for i, node in enumerate(unique_nodes)}
 
     for node, (x, y) in node_positions.items():
         cells.append(
-            f'<mxCell id="{node}" value="{node}" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">'
+            f'<mxCell id="{utilitario.normalize_name(node)}" value="{utilitario.normalize_name(node)}" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">'
             f'<mxGeometry x="{x}" y="{y}" width="120" height="60" as="geometry"/>'
             f'</mxCell>'
         )
 
     # Crear conexiones (aristas)
     for index, row in df.iterrows():
-        source, destination = row['Origen'], row['Destino']
+        source, destination = utilitario.normalize_name(row['Origen']), utilitario.normalize_name(row['Destino'])
         connection_id = f"edge-{index}"
         cells.append(
-            f'<mxCell id="{utilitario.normalize_name(connection_id)}" value="{utilitario.normalize_name(row["Tipo conexion"])}" style="edgeStyle=elbowEdgeStyle;rounded=1;" edge="1" parent="1" source="{source}" target="{destination}">'
+            f'<mxCell id="{connection_id}" value="{row["Tipo conexion"]}" style="edgeStyle=elbowEdgeStyle;rounded=1;" edge="1" parent="1" source="{source}" target="{destination}">'
             f'<mxGeometry relative="1" as="geometry"/>'
             f'</mxCell>'
         )
@@ -57,7 +57,7 @@ def __build_drawio(df: DataFrame, satelite_name: str):
     else:
         satelite_name = 'global_'
     # Guardar el archivo
-    output_file = f'result/integracion/{satelite_name}{fecha_formateada}.drawio'
+    output_file = f'result/integracion/por_satelite/{satelite_name}{fecha_formateada}.drawio'
     with open(output_file, "w", encoding="utf-8") as f:
         f.write(drawio_content)
 
